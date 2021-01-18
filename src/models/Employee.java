@@ -12,32 +12,32 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Table(name = "employees")
-@NamedQueries({
+@NamedQueries({   //名前を付けた命令
     @NamedQuery(
         name = "getAllEmployees",
-        query = "SELECT e FROM Employee AS e ORDER BY e.id DESC"
+        query = "SELECT e FROM Employee AS e ORDER BY e.id DESC"    //IDの小さい順番に並べる
     ),
     @NamedQuery(
         name = "getEmployeesCount",
-        query = "SELECT COUNT(e) FROM Employee AS e"
+        query = "SELECT COUNT(e) FROM Employee AS e"    //全件数を取得
     ),
     @NamedQuery(
         name = "checkRegisteredCode",
-        query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"
+        query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"   //指定のIDが登録されているか確認
     ),
     @NamedQuery(
         name = "checkLoginCodeAndPassword",
-        query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"
+        query = "SELECT e FROM Employee AS e WHERE e.delete_flag = 0 AND e.code = :code AND e.password = :pass"     //社員番号とパスワードが一致するか確認
     )
 })
 @Entity
 public class Employee {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     //自動採番
     private Integer id;
 
-    @Column(name = "code", nullable = false, unique = true)
+    @Column(name = "code", nullable = false, unique = true)     //既に登録されている社員番号は使えない
     private String code;
 
     @Column(name = "name", nullable = false)
@@ -55,7 +55,7 @@ public class Employee {
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
 
-    @Column(name = "delete_flag", nullable = false)
+    @Column(name = "delete_flag", nullable = false)     //削除されているかどうか
     private Integer delete_flag;
 
     public Integer getId() {
