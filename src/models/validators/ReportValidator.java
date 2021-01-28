@@ -65,9 +65,9 @@ public class ReportValidator {
 
 
             if(Integer.parseInt(vst[0]) -Integer.parseInt(vet[0]) > 0){
-                return "時間を確認してください。";
+                return "出勤時間と退勤時間が逆になっています。";
             }else if(Integer.parseInt(vst[0]) -Integer.parseInt(vet[0]) == 0  &&  Integer.parseInt(vst[1]) -Integer.parseInt(vet[1]) >= 0){
-                return "時間を確認してください。";
+                return "出勤時間と退勤時間が逆になっています。";
             }
         }
 

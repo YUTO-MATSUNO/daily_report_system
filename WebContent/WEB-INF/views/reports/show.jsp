@@ -43,12 +43,30 @@
                             <th>退勤時間</th>
                             <td><c:out value="${report.end_time}" /></td>
                         </tr>
+                        <tr>
+                            <th>いいね件数</th>
+                            <td><a href="<c:url value="/reports/GoodShow?id=${report.id}" />">${reports_count} </a></td>
+                        </tr>
                     </tbody>
                 </table>
 
-                <c:if test="${sessionScope.login_employee.id == report.employee.id}">
-                    <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
+                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
+
+                <p><label for="good">
+                <c:if test="${count == 0}">
+                <a href="<c:url value="/GoodAdd?id=${report.id}" />"><button type="submit">いいね！</button></a>
                 </c:if>
+
+                <c:if test="${count != 0}">
+                <a href="<c:url value="/GoodDelete?id=${report.id}" />"><button type="submit">いいねを解除</button></a>
+                </c:if>
+                </label></p>
+                </c:if>
+
+                <c:if test="${sessionScope.login_employee.id == report.employee.id}">
+                <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
+                </c:if>
+
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

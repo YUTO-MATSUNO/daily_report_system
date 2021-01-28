@@ -1,12 +1,17 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -57,6 +62,20 @@ public class Employee {
 
     @Column(name = "delete_flag", nullable = false)     //削除されているかどうか
     private Integer delete_flag;
+
+    //この従業員がいいねをした日報リスト
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="goods", joinColumns = @JoinColumn( name = "employee_id"),
+    inverseJoinColumns = @JoinColumn(name="report_id"))
+    private List<Report> reportList;
+
+    public List<Report> getReportList() {
+        return reportList;
+    }
+
+    public void setReportList(List<Report> reportList) {
+        this.reportList = reportList;
+    }
 
     public Integer getId() {
         return id;

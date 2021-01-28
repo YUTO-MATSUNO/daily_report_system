@@ -2,14 +2,17 @@ package models;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -60,6 +63,18 @@ public class Report {
 
     @Column(name = "end_time", length = 255, nullable = false)
     private String end_time;
+
+    //この投稿にいいねをしてくれた従業員のリスト
+    @ManyToMany( mappedBy = "reportList", fetch = FetchType.EAGER)
+    private List<Employee> goodEmployees;
+
+    public List<Employee> getGoodEmployees() {
+        return goodEmployees;
+    }
+
+    public void setGoodEmployees(List<Employee> goodEmployees) {
+        this.goodEmployees = goodEmployees;
+    }
 
     public String getStart_time() {
         return start_time;
