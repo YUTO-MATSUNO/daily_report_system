@@ -50,18 +50,15 @@
                     </tbody>
                 </table>
 
-                <c:if test="${sessionScope.login_employee.id != report.employee.id}">
-
                 <p><label for="good">
                 <c:if test="${count == 0}">
                 <a href="<c:url value="/GoodAdd?id=${report.id}" />"><button type="submit">いいね！</button></a>
                 </c:if>
 
-                <c:if test="${count != 0}">
+                <c:if test="${count == 1}">
                 <a href="<c:url value="/GoodDelete?id=${report.id}" />"><button type="submit">いいねを解除</button></a>
                 </c:if>
                 </label></p>
-                </c:if>
 
                 <c:if test="${sessionScope.login_employee.id == report.employee.id}">
                 <p><a href="<c:url value="/reports/edit?id=${report.id}" />">この日報を編集する</a></p>
